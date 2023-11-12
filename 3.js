@@ -19,3 +19,13 @@ function fillArray(min, max) {
 // В нас був пустий масив.Після першої ітерації до нього додалась двійка,
 // тому довжина буде 1.
 // Відповідь: 1.
+
+// Задачка про годинник
+
+const totalMinutes = 1441;
+
+const hours = String(Math.floor(totalMinutes / 60)).padStart(2, '0');
+const minutes = String(totalMinutes % 60).padEnd(2, '0');
+
+const result = `${hours}:${minutes}`;
+console.log(result);
