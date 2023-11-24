@@ -29,3 +29,37 @@
 
 // const result = `${hours}:${minutes}`;
 // console.log(result);
+
+// Важлива і цікава задачка 5 модулю з конспекту - в самому кінці конспекту.
+
+// const students = [
+//   { name: 'Mango', score: 83, courses: ['mathematics', 'physics'] },
+//   { name: 'Poly', score: 59, courses: ['science', 'mathematics'] },
+//   { name: 'Ajax', score: 37, courses: ['physics', 'biology'] },
+//   { name: 'Kiwi', score: 94, courses: ['literature', 'science'] },
+// ];
+
+// const uniqueSortedCourses = students.flatMap(student => student.courses);
+// // .filter((course, index, array) => array.indexOf(course) === index)
+// // .toSorted((a, b) => a.localeCompare(b));
+
+// console.log(uniqueSortedCourses); // ["biology", "science", "literature", "mathematics", "physics"]
+
+// const arr = [
+//   'mathematics',
+//   'physics',
+//   'science',
+//   'mathematics',
+//   'physics',
+//   'biology',
+//   'literature',
+//   'science',
+// ];
+
+// const found = arr.indexOf('physics');
+
+// console.log(found);
+// // // 0 === 0 індекс оф це завжди буде одне і те ж число, яке буде = ідексу першої зустрічі елемента який шукаємо.
+// // Для метематики це буде нуль.
+// // // // 0 === 3 а от просто індекс буде змінюватись, для матеатики спочатку це буде 0, а потім 3.
+// // відповідно до нового масиву додасться лише  одне значення яке виконує умову.
