@@ -263,11 +263,6 @@
 // Якщо рядок містить коректний
 // код - функція повертає true, в іншому випадку повертає false.
 
-const someFn = `function foo() {
-  const arr = [1, 2, 3];
-  console.log(arr);
-}`;
-
 // const someFn = `function foo( {)
 //   const arr = [1, 2, 3;
 //   console.log(arr)];
@@ -294,6 +289,11 @@ const someFn = `function foo() {
 
 // console.log(checkBrackets(someFn));
 
+const someFn = `function foo() {
+  const arr = [1, 2, 3];
+  console.log(arr);
+}`;
+
 function checkBrackets(str) {
   let arr = [];
   for (let i = 0; i <= str.length; i += 1) {
@@ -308,7 +308,7 @@ function checkBrackets(str) {
       arr.push(str[i]);
     }
   }
-  const string = arr.join();
+  const string = arr.join('');
   console.log(string);
   const bracket = {
     ')': '(',
@@ -333,8 +333,8 @@ function isBracketClosed(brack) {
   return [')', ']', '}'].indexOf(brack) > -1;
 }
 
-const result1 = checkBrackets('[]');
-console.log(result1);
+const result = checkBrackets('[[hel]{}]');
+console.log(result);
 
 // function isValid(s) {
 //   const brackets = {
