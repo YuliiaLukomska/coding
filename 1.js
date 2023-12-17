@@ -289,53 +289,6 @@
 
 // console.log(checkBrackets(someFn));
 
-const someFn = `function foo() {
-  const arr = [1, 2, 3];
-  console.log(arr);
-}`;
-
-function checkBrackets(str) {
-  let arr = [];
-  for (let i = 0; i <= str.length; i += 1) {
-    if (
-      str[i] === '[' ||
-      str[i] === ']' ||
-      str[i] === '{' ||
-      str[i] === '}' ||
-      str[i] === '(' ||
-      str[i] === ')'
-    ) {
-      arr.push(str[i]);
-    }
-  }
-  const string = arr.join('');
-  console.log(string);
-  const bracket = {
-    ')': '(',
-    ']': '[',
-    '}': '{',
-  };
-  const array = [];
-  for (let i = 0; i < string.length; i += 1) {
-    if (isBracketClosed(string[i])) {
-      if (bracket[string[i]] !== array.pop()) {
-        return false;
-      } else {
-        array.pop();
-      }
-    } else {
-      array.push(string[i]);
-    }
-  }
-  return array.length === 0;
-}
-function isBracketClosed(brack) {
-  return [')', ']', '}'].indexOf(brack) > -1;
-}
-
-const result = checkBrackets('[[hel]{}]');
-console.log(result);
-
 // function isValid(s) {
 //   const brackets = {
 //     ')': '(',
@@ -362,4 +315,103 @@ console.log(result);
 // const result = isValid('[{}()]');
 // console.log(result);
 
+// const someFn = `function foo() {
+//   const arr = [1, 2, 3];
+//   console.log(arr);
+// }`;
 
+// function checkBrackets(str) {
+//   let arr = [];
+//   for (let i = 0; i < str.length; i += 1) {
+//     if (
+//       str[i] === '[' ||
+//       str[i] === ']' ||
+//       str[i] === '{' ||
+//       str[i] === '}' ||
+//       str[i] === '(' ||
+//       str[i] === ')'
+//     ) {
+//       arr.push(str[i]);
+//     }
+//   }
+//   console.log(arr);
+//   const string = arr.join('');
+
+//   console.log(string);
+//   // [[]{}]
+//   const bracket = {
+//     ')': '(',
+//     ']': '[',
+//     '}': '{',
+//   };
+//   const array = [];
+//   for (let i = 0; i < string.length; i += 1) {
+//     if (isBracketClosed(string[i])) {
+//       if (bracket[string[i]] !== array.pop()) {
+//         return false;
+//       } else {
+//         console.log(array);
+//         array.splice(-1, 1);
+//         console.log(array);
+//       }
+//     } else {
+//       array.push(string[i]);
+//       console.log(array);
+//     }
+//   }
+//   return array.length === 0;
+// }
+
+// function isBracketClosed(brack) {
+//   return [')', ']', '}'].indexOf(brack) > -1;
+// }
+
+// const result = checkBrackets('[[hel]{}]');
+// console.log(result);
+
+const someFn = `function foo() {
+  const arr = [1, 2, 3];
+  console.log(arr);
+}`;
+
+function checkBrackets(str) {
+  let arr = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (
+      str[i] === '[' ||
+      str[i] === ']' ||
+      str[i] === '{' ||
+      str[i] === '}' ||
+      str[i] === '(' ||
+      str[i] === ')'
+    ) {
+      arr.push(str[i]);
+    }
+  }
+  console.log(arr); // ['(', ')', '{', '[', ']', '(', ')', '}']
+  const bracket = {
+    ')': '(',
+    ']': '[',
+    '}': '{',
+  };
+  const array = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (isBracketClosed(arr[i])) {
+      if (bracket[arr[i]] !== array.pop()) {
+        return false;
+      } else {
+        array.pop();
+      }
+    } else {
+      array.push(arr[i]);
+    }
+  }
+  return array.length === 0;
+}
+
+function isBracketClosed(brack) {
+  return [')', ']', '}'].indexOf(brack) > -1;
+}
+
+const result = checkBrackets(someFn);
+console.log(result);
