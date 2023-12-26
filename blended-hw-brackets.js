@@ -26,14 +26,18 @@ function checkBrackets(str) {
   const finalArray = [];
   for (let i = 0; i < arr.length; i += 1) {
     if (isBracketClosed(arr[i])) {
+      // console.log(finalArray);
       if (bracketsType[arr[i]] !== finalArray.pop()) {
+        // ('саме тут (рядок вище) видаляється останній елемент масиву. Яким чином? finalArray.pop() буде дорівнювати останньому елементу масиву і водночас цей елемент буде видалятися з масиву');
         return false;
       } else {
-        finalArray.splice(-1, 0);
+        // console.log(finalArray);
+        // console.log('це закриваюча дужка');
+        // console.log(finalArray);
       }
     } else {
       finalArray.push(arr[i]);
-      console.log(finalArray);
+      // console.log(finalArray);
     }
   }
   return finalArray.length === 0;
@@ -43,5 +47,5 @@ function isBracketClosed(brack) {
   return [')', ']', '}'].indexOf(brack) > -1;
 }
 
-const result = checkBrackets(someFn);
+const result = checkBrackets('{ []() }');
 console.log(result);
