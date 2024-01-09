@@ -72,3 +72,47 @@
 
 // const result = sum(arr);
 // console.log(result);
+
+// const form = document.querySelector('.feedback-form');
+// const localKey = 'feedback-text-key';
+
+// form.addEventListener('input', event => {
+//   console.log(event.target.value);
+//   localStorage.setItem(localKey, event.target.value);
+// });
+
+// form.addEventListener('submit', event => {
+//   event.preventDefault();
+//   console.log(event.target.elements.message.value);
+//   console.log(event.target);
+//   console.log(event.currentTarget);
+//   form.reset();
+// });
+
+// console.log(form.elements);
+
+// const form = document.querySelector('.feedback-form');
+// const localStorageKey = 'goit-example-message';
+
+// form.elements.message.value = localStorage.getItem(localStorageKey) || '';
+
+// form.addEventListener('input', evt => {
+//   localStorage.setItem(localStorageKey, evt.target.value);
+// });
+
+// form.addEventListener('submit', evt => {
+//   evt.preventDefault();
+//   localStorage.removeItem(localStorageKey);
+//   form.reset();
+// });
+
+// class User {
+//   constructor(username, lastname) {
+//     this.firstname = username;
+//     this.secondname = lastname;
+//   }
+// }
+
+// const client = new User('Yuliia', 'Lukomska');
+
+// console.log(client);
