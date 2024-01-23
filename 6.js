@@ -215,39 +215,82 @@
 // const result = arrsum(arr);
 // console.log(result);
 
-console.log(+'1' + '1' + '2'); // 112
-console.log('A' - 'B' + 2); // NaN
-console.log('A' - 'B' + 'A' + 3); // NaNA3
+// const isSuccess = false;
 
-console.log(String); // function
-console.log(Number); //function
+// const promise = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     if (isSuccess) {
+//       resolve('Success! Value passed to resolve function');
+//     } else {
+//       reject('Error! Error passed to reject function');
+//     }
+//   }, 3000);
+// });
 
-console.log(typeof null == 'object');
+// console.log(promise);
 
-// порядок виведення в консоль: // 1 3 2
-console.log(1);
-setTimeout(() => {
-  console.log(2);
-}, 1000);
-console.log(3);
+// promise
+//   .then(value => {
+//     console.log(value);
+//   })
+//   .catch(err => console.log(err))
+//   .finally(() => {
+//     console.log('the end of promise');
+//   });
 
-// Задача по js: дано масив чисел. Напиши функцію, яка порахує суму всіх парних чисел масиву.
+// const result = makePromise({ value: 'A', delay: 0 });
+// console.log(result);
 
-const arr = [1, 3, 4];
+// const makePromise = ({ value, delay, isFulFilled = true }) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (isFulFilled) {
+//         resolve(value);
+//       } else {
+//         reject(value);
+//       }
+//     }, delay);
+//   });
+// };
 
-function arrsum(arr) {
-  let total = 0;
+// makePromise({ value: 'A', delay: 2000 })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));
 
-  for (const el of arr) {
-    if (el % 2 === 0) {
-      total = total + el;
+// makePromise({ value: 'B', delay: 4000 })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));
+
+// makePromise({ value: 'error', delay: 6000, isFulFilled: false })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));
+
+// Чому виклик функції повертає undefined?
+
+const makePromise = ({ value, delay, isFulFilled = true }) => {
+  setTimeout(() => {
+    if (isFulFilled) {
+      return Promise.resolve(value);
+    } else {
+      return Promise.reject(value);
     }
-  }
-  return total;
-}
+  }, delay);
+};
 
-const result = arrsum(arr);
-console.log(result);
+makePromise({ value: 'hello', delay: 2000 })
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
 
-const string = 'Hello world'; //треба вибрати метод, за доп. якого ти зможеш отримати слово "Hello".
-console.log(string.slice(0, 5)); // 'Hello'
+// Якщо так як нижче, без setTimeout(), то все працює
+
+// const makePromise = ({ value, delay, isFulFilled = true }) => {
+//   if (isFulFilled) {
+//     return Promise.resolve(value);
+//   } else {
+//     return Promise.reject(value);
+//   }
+// };
+
+// makePromise({ value: 'hello', delay: 2000 })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));
