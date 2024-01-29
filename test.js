@@ -34,3 +34,19 @@ console.log(result);
 
 const string = 'Hello world'; //треба вибрати метод, за доп. якого ти зможеш отримати слово "Hello".
 console.log(string.slice(0, 5)); // 'Hello'
+
+let obj = {
+  firstProp: 'name',
+};
+// console.log(obj.hasOwnProperty('name')); // false
+console.log(obj.hasOwnProperty('firstProp')); // true
+
+function foo(x) {
+  console.log(3);
+  console.log(arguments.length);
+  console.log(x);
+  console.log(arguments);
+}
+
+foo(); // 3; 0; unfefined; [] псевдомасив;
+foo(1, 2, 3); // 3; 3; 1; [1, 2, 3] псевдомасив;

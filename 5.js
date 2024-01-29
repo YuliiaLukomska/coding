@@ -58,3 +58,33 @@
 // destroyBtn.addEventListener('click', () => {
 //   boxes.innerHTML = '';
 // });
+
+// Чому виклик функції повертає undefined?
+// Питання
+// const makePromise = ({ value, delay, isFulFilled = true }) => {
+//   setTimeout(() => {
+//     if (isFulFilled) {
+//       return Promise.resolve(value);
+//     } else {
+//       return Promise.reject(value);
+//     }
+//   }, delay);
+// };
+
+// makePromise({ value: 'hello', delay: 2000 })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));
+
+// Якщо так як нижче, без setTimeout(), то все працює
+
+// const makePromise = ({ value, delay, isFulFilled = true }) => {
+//   if (isFulFilled) {
+//     return Promise.resolve(value);
+//   } else {
+//     return Promise.reject(value);
+//   }
+// };
+
+// makePromise({ value: 'hello', delay: 2000 })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));

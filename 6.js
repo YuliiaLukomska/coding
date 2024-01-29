@@ -266,20 +266,20 @@
 //   .catch(error => console.log(error));
 
 // Чому виклик функції повертає undefined?
+// Питання
+// const makePromise = ({ value, delay, isFulFilled = true }) => {
+//   setTimeout(() => {
+//     if (isFulFilled) {
+//       return Promise.resolve(value);
+//     } else {
+//       return Promise.reject(value);
+//     }
+//   }, delay);
+// };
 
-const makePromise = ({ value, delay, isFulFilled = true }) => {
-  setTimeout(() => {
-    if (isFulFilled) {
-      return Promise.resolve(value);
-    } else {
-      return Promise.reject(value);
-    }
-  }, delay);
-};
-
-makePromise({ value: 'hello', delay: 2000 })
-  .then(value => console.log(value))
-  .catch(error => console.log(error));
+// makePromise({ value: 'hello', delay: 2000 })
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error));
 
 // Якщо так як нижче, без setTimeout(), то все працює
 
@@ -294,3 +294,86 @@ makePromise({ value: 'hello', delay: 2000 })
 // makePromise({ value: 'hello', delay: 2000 })
 //   .then(value => console.log(value))
 //   .catch(error => console.log(error));
+
+// fetch('https://jsonplaceholder.typicode.com/users')
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(response.status);
+//     }
+//     return response.json();
+//   })
+//   .then(data => {
+//     // Data handling
+//     console.log(data);
+//   })
+//   .catch(error => {
+//     // Error handling
+//     console.log(error);
+//   });
+// async function foo() {
+//   console.log(5);
+// }
+// const result = foo();
+// console.log(result);
+
+// foo().then(data => console.log(data));
+
+function fetchPosts() {
+  return fetch('https://jsonplaceholder.typicode.com/posts').then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
+}
+
+fetchPosts()
+  .then(posts => console.log(posts))
+  .catch(error => console.log(error));
+
+async function asyncFetchPost() {
+  // оператор await витягає з промісу об'єкт response і зберігає його в константу.
+  //  І ми можемо використовувати його в нашій функції так само якби це був звичайниий синхронний код без використання промісів.
+  // async/await дали можливість витягнути результат асинхронної операції в синхронний код. Без них це неможливо.
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const data = await response.json();
+
+  return data;
+}
+
+// asyncFetchPost()
+//   .then(data => console.log(data))
+//   .catch(error => console.log(error));
+
+async function onasyncFetchPost() {
+  try {
+    const data = await asyncFetchPost();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+onasyncFetchPost();
+
+//Бібліотека Axios
+const fetchUsers = async () => {
+  const response = await axios.get(
+    'https://jsonplaceholder.typicode.com/users'
+  );
+  return response.data;
+};
+
+const doStuff = async () => {
+  try {
+    const users = await fetchUsers();
+    console.log(users);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+doStuff();
