@@ -88,3 +88,6 @@
 // makePromise({ value: 'hello', delay: 2000 })
 //   .then(value => console.log(value))
 //   .catch(error => console.log(error));
+
+const result = '4' + '8' - '6';
+console.log(result);
