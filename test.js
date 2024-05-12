@@ -153,6 +153,46 @@ function createObjCopy(obj) {
 }
 console.log(createObjCopy(testObj));
 
-// Задача: є масив чисел, треба відфільтрувати унікальні числа. Тобто, отримати масив лише з унікальними числами.
+// Задача: є масив чисел,треба відфільтрувати унікальні числа. Тобто,отримати масив лише з унікальними числами.(Відфільтрувати масив на унікальні значення)
 
-const 
+const arrayOfNumbers = [1, 4, 4, 7, 8, 8, 8, 37, 37];
+const filteredNumb = new Set(arrayOfNumbers); //отримаємо Set, де будуть лише унікальні числа Set(5) {1, 4, 7, 8, 37}
+const arrayOfFilteredNumb = [...filteredNumb]; // робимо із сета масив
+console.log(arrayOfFilteredNumb); // [1, 4, 7, 8, 37]
+
+// Set - це колекція унікальних значень. Має багато методів. Якщо ти хочеш додати в сет нове значення, то сет перевіряє,
+// чи є вже це значення(складні типи перевіряє за посиланням, а прості за ===), якщ вже є , то не додає, якщо нема - додає.
+
+const set = new Set();
+set.add(testObj);
+console.log(set); // Set(1) {{…}} - цифра в дужках означає кількість значень в колекції
+set.add(testObj);
+console.log(set.size); // 1 - не додало той самий об'єкт.
+set.add(1);
+set.add('hello');
+console.log(set.keys());
+console.log(set.entries());
+
+// якщо тобі потрібно записати всі аргументи функції в масив, - використовуй оператор rest.
+function foos(...arr) {
+  const array1 = arr;
+  return array1;
+}
+
+console.log(foos(1, 3, 4, 'hello')); // [1, 3, 4, 'hello']
+
+function fooq() {
+  // console.log('var', q);
+  // q = 10;
+  // console.log('let', w);
+  // w = 3;
+  // console.log('const', e);
+  // const e = 5;
+}
+
+const fooqResult = fooq();
+console.log(fooqResult); // error, q is not defined. error, w is not defined. error, Cannot access 'e' before initialization. Ти викликаєш зміннну до її оголошення.
+
+let hello;
+var qwery;
+const yes = 1;
