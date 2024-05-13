@@ -1,8 +1,27 @@
 div ~ p {
-  color: yellow;
+  color: rgb(255, 106, 0);
 }
 
 .arrow-icon {
   stroke: black;
   fill: white;
+}
+/* це комбінований селектор типу безпосередній нащадок */
+/* правила будуть застосовуватись до тегів li, які є прямими дітьми елемента з класом english-list */
+.english-list > li {
+  color: green;
+  text-transform: uppercase;
+}
+.ua-list > li {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.list > li {
+  font-size: 18px;
+}
+
+/* до тегу li з класом active, який є прямою дитиною  */
+.list > li.active {
+  color: brown;
 }
