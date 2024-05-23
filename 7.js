@@ -92,6 +92,8 @@ console.log(Array.isArray(fox)); // true
 
 // console.log(dog);
 // const dog = 1;
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------
 // Перебираючі методи масиву
 // 1. map
 const countries = ['Spain', 'Canada', 'Poland'];
@@ -116,7 +118,7 @@ const value = 2;
 
 function changeEven(numbers, value) {
   const copyNumbers = [...numbers];
-  // метод forEach перебирає масив і до кожного елемента масива виконує колбек-фунцію. Завжди повертає undefined.
+  // 2. метод forEach перебирає масив і до кожного елемента масива виконує колбек-фунцію. Завжди повертає undefined.
   copyNumbers.forEach((item, index) => {
     if (item % 2 === 0) {
       copyNumbers[index] = copyNumbers[index] + value;
@@ -142,11 +144,11 @@ const calculateTotalPrice = orderedItems => {
 };
 
 const resultCalculateTotalPrice = calculateTotalPrice(numbers);
-console.log(resultCalculateTotalPrice);
+console.log(resultCalculateTotalPrice); // 21
 
 const arrayOfNumbers = [3, 7, 10, 12];
 const evenNumber = arrayOfNumbers.filter(item => item % 2 === 0);
-console.log(evenNumber); // [10, 12] метод filter() використовується для пошуку всіх значень, що задовільняють умову.
+console.log(evenNumber); // [10, 12] 3. метод filter() використовується для пошуку всіх значень, що задовільняють умову.
 
 const LOW_SCORE = 50;
 const HIGH_SCORE = 80;
@@ -168,14 +170,14 @@ console.log(best);
 console.log(average);
 console.log(worst);
 
-// метод find() - повертає перше значення, яке задовільняє умову, після чого перебирання масиву припиняється.
+//4. метод find() - повертає перше значення, яке задовільняє умову, після чого перебирання масиву припиняється.
 // якщо жоден елемент не задовільнив умову, то повертає undefined.
 
 const words = ['apple', 'fox', 'dog'];
 const smallWord = words.find(item => item.length <= 3);
 console.log(smallWord); // 'fox'
 
-// метод every() - повертає true, якщо ВСІ елементи задовільнили умову колбек-функції та повертає false,якщо хоча б один елемент повернув false і одразу перебір масиву припиняється.
+//5. метод every() - повертає true, якщо ВСІ елементи задовільнили умову колбек-функції та повертає false,якщо хоча б один елемент повернув false і одразу перебір масиву припиняється.
 
 const every = words.every(item => item.length >= 3);
 console.log(every); // true
@@ -190,7 +192,7 @@ const products = [
 const isAllProductsAvailable = products.every(item => item.quantity > 0);
 console.log(isAllProductsAvailable); // false
 
-// метод some() перевіряє чи задовольняє хоча б один елемент умові колбек-функції.Якщо так, то повертає true. Перебирання припиняється,якщо колбек повертає true. Якщо жоден елемент масиву не задовольняє умову колбека,тоді певертається false.
+//6. метод some() перевіряє чи задовольняє хоча б один елемент умові колбек-функції.Якщо так, то повертає true. Перебирання припиняється,якщо колбек повертає true. Якщо жоден елемент масиву не задовольняє умову колбека,тоді певертається false.
 
 const isAnyProductAvailable = products.some(item => item.quantity > 0);
 console.log(isAnyProductAvailable); // true
@@ -203,7 +205,7 @@ console.log(isAnyProductAvailable); // true
   let flower = 'rose';
 }
 console.log(pet);
-//метод reduce() застосовується для послудовної обробки кожного елементу масиву із збереженням проміжного результату. Цей метод має початкове значення акумулятора та акумулятор.
+//7. метод reduce() застосовується для послудівної обробки кожного елементу масиву із збереженням проміжного результату. Цей метод має початкове значення акумулятора та акумулятор.
 // array.reduce((accum, item, index, array)=> , initialValue); accum - це акумулятор, тобто проміжний результат. Значення,яке поверне
 // колбек - функція на поточній ітерації буде значенням цього параметра на наступній ітерації.
 
@@ -219,3 +221,92 @@ console.log(sorted);
 // Масив рядків сортується за алфавітом.  Водночас порядковий номер великих літер менший, ніж у малих.
 const sortedStrings = words.toSorted();
 console.log(sortedStrings); //['apple', 'dog', 'fox']
+const letters = ['b', 'B', 'a', 'A', 'c', 'C'];
+console.log(letters.toSorted()); // ["A", "B", "C", "a", "b", "c"]
+// метод toSorted() не змінює вихідний масив.
+
+// Свій порядок сортування чисел. Для цього викор. метод toSorted(compareFunction) з колбек функцією, яка буде порівнювати два значення.
+const scores = [93, 27, 45, 87, 11, 3];
+const ascending = scores.toSorted((a, b) => a - b);
+// колбек функція буде порівнювати два значення,і якщо різниця буде від'ємна,тобто а менше за b, тоді a поставлять перед b.
+// Таким чином масив відсортується за зростанням.
+console.log(ascending); // [3, 11, 27, 45, 87, 93]
+const descendingg = scores.toSorted((a, b) => b - a);
+// в цьому випадку,якщо b більше за a, то воно буде стояти перед а. Відбудеться сортування за спаданням.
+console.log(descendingg); // [93, 87, 45, 27, 11, 3]
+
+//для сортування рядків викор метод localCompare() -> firstString.localCompare(secondString);
+const students2 = ['Jacob', 'Artemis', 'Solomon', 'Adrian', 'Kai', 'Ganymede'];
+
+const inAlphabetOrder = students2.toSorted((a, b) => a.localeCompare(b));
+console.log(inAlphabetOrder); // [ "Adrian", "Artemis", "Ganymede", "Jacob", "Kai", "Solomon" ]
+
+const inReversedOrder = students2.toSorted((a, b) => b.localeCompare(a));
+console.log(inReversedOrder); // [ "Solomon", "Kai", "Jacob", "Ganymede", "Artemis", "Adrian" ]
+
+const students3 = [
+  { name: 'Mango', score: 83 },
+  { name: 'Poly', score: 59 },
+  { name: 'Ajax', score: 37 },
+  { name: 'Kiwi', score: 94 },
+];
+/* Необхідно відсортувати масив об'єктів за трьома різними сценаріями:
+за зростанням кількості балів
+за спаданням кількості балів
+за ім'ям студента в алфавітному порядку*/
+
+const ascendingScore = students3.toSorted(
+  (firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+);
+console.log(ascendingScore);
+
+const descendingScore = students3.toSorted(
+  (firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+);
+console.log(descendingScore);
+
+const alphaberOrder = students3.toSorted((firstStudent, secondStudent) =>
+  firstStudent.name.localeCompare(secondStudent.name)
+);
+console.log(alphaberOrder);
+
+const schoolchildren = [
+  { name: 'Mango', score: 83, courses: ['mathematics', 'physics'] },
+  { name: 'Poly', score: 59, courses: ['science', 'mathematics'] },
+  { name: 'Ajax', score: 37, courses: ['physics', 'biology'] },
+  { name: 'Kiwi', score: 94, courses: ['literature', 'science'] },
+];
+
+/*
+ Необхідно отримати масив їхніх імен, відсортованих за зростанням балів за тест.
+*/
+
+const answer = schoolchildren
+  .toSorted((firstChild, secondChild) => firstChild.score - secondChild.score)
+  .map(item => item.name);
+
+console.log(answer); // ['Ajax', 'Poly', 'Mango', 'Kiwi']
+// Отримаємо масив унікальних відвідуваних предметів, відсортований за алфавітом.
+
+const answer2 = schoolchildren
+  .flatMap(item => item.courses)
+  .filter((item, index, array) => array.indexOf(item) === index)
+  .toSorted((a, b) => a.localeCompare(b));
+
+// Метод indexOf() буде шукати індекс першого елемента з такою назвою. Таким чином, indexOf('mathematics') завжди буде = 0, а от значення індексу буде змінюватись і для математики буде 0 та 3. І відповідно 0 !== 3. Тому відфільтрується лише унікальне значення.
+
+// this
+function foo() {
+  console.log('this -', this);
+}
+
+foo(); // this - undefined
+
+const book = {
+  updateTitle(newTitle) {
+    // ...
+  },
+};
+const update = book.updateTitle;
+const res = update('Lord Of The Rings');
+console.log(res); // undefined
