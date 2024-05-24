@@ -310,3 +310,63 @@ const book = {
 const update = book.updateTitle;
 const res = update('Lord Of The Rings');
 console.log(res); // undefined
+
+// Прототипування
+
+const cat = {
+  name: 'Bobik',
+  color: 'grey',
+  age: 3,
+  hasOwner: false,
+};
+
+const mouse = {
+  name: 'Ben',
+  temper: 'pretty',
+};
+
+const pets = Object.create(cat);
+pets.kind = ['cats', 'dogs', 'fishes', 'hamsters'];
+
+console.log(pets);
+console.log(pets.color); // grey
+console.log(cat.kind); // undefined
+
+const isPrototype = cat.isPrototypeOf(pets);
+console.log(isPrototype); // true
+const hasOwnProperty = pets.hasOwnProperty('name');
+console.log(hasOwnProperty); // false
+
+// Перебір ключів та властивостей об'єкта з прототипом.
+// Можна викор цикл for in (але він не розрізняє властивості об'єкта від прототипа і перебирає все), тому треба додати перевірку на hasOwnProperty
+//Краще скористатит Object.keys() та Object.values() і циклом for of
+
+const animal = {
+  leg: 4,
+  tail: true,
+  whiskers: true,
+};
+
+const hamster = Object.create(animal); // тепер animal є прототипом новоствореного об'єкта hamster
+hamster.name = 'Richi';
+hamster.color = 'white';
+hamster.age = 6;
+
+for (const key of Object.keys(hamster)) {
+  console.log(key); // name color age
+}
+
+for (const values of Object.values(hamster)) {
+  console.log(values); // Richi white 6
+}
+let total = 0;
+
+for (const number of [1, 2, 3, 4, 5]) {
+  total += number;
+}
+console.log(total);
+
+// Створення об'єкту без прототипу
+const objectWithoutPrototype = Object.create(null);
+objectWithoutPrototype.age = 10;
+console.log(objectWithoutPrototype);
