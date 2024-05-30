@@ -294,7 +294,7 @@ const answer2 = schoolchildren
   .toSorted((a, b) => a.localeCompare(b));
 
 // Метод indexOf() буде шукати індекс першого елемента з такою назвою. Таким чином, indexOf('mathematics') завжди буде = 0, а от значення індексу буде змінюватись і для математики буде 0 та 3. І відповідно 0 !== 3. Тому відфільтрується лише унікальне значення.
-
+// Метод масиву indexOf(elem) використовується для визначення індексу першого входження елемента elem у масиві.
 // this
 function foo() {
   console.log('this -', this);
@@ -370,3 +370,60 @@ console.log(total);
 const objectWithoutPrototype = Object.create(null);
 objectWithoutPrototype.age = 10;
 console.log(objectWithoutPrototype);
+
+// Об'єднання масивів
+const groupTrainings = ['yoga', 'pilates', 'strength training', 'cardio'];
+const individualTrainings = ['stretching', 'kangoo jumping'];
+
+const allTrainings = [...groupTrainings, ...individualTrainings];
+console.log(allTrainings);
+const allTrainings2 = groupTrainings.concat(individualTrainings);
+console.log(allTrainings2);
+
+// пошук елемента у масиві
+const yoga = allTrainings.indexOf('yoga');
+console.log(yoga); // 0
+
+const pilatesExist = allTrainings.includes('pilates');
+console.log(pilatesExist); // true
+
+const findCardio = allTrainings.find((item, index) => index === 3);
+console.log(findCardio); // cardio
+
+function isActive() {
+  return true;
+}
+
+isActive();
+
+function funcArguments(a, b, c, ...rest) {
+  console.log(arguments); // [1, 5, 8, 20]
+  console.log(rest); // [10, 20]
+  return arguments;
+}
+
+funcArguments(1, 5, 8, 10, 20);
+
+const arrowFunc = (...rest) => {
+  // console.log(arguments); // arguments is not defined
+  console.log(rest); // [2,6,10]
+  return rest;
+};
+
+arrowFunc(2, 6, 10);
+
+const resOfArrowFunc = arrowFunc(2, 6, 9);
+console.log(resOfArrowFunc);
+console.log(funcArguments.prototype); // {}
+// constructor : ƒ funcArguments(a, b, c, ...rest)
+// [[Prototype]] : Object
+
+console.log(arrowFunc.prototype); // undefined (стрілочні функції не мають prototype, на відміну від звичайних функцій)
+
+const arrayFirst = [1, 2, 3, 4, 5];
+const arraySecond = [2, 9, 4, 13, 8, 5];
+
+function crossedNumberChoose(array1, array2) {
+  const commonArray = array1.concat(array2);
+  const crossedNumber = commonArray.filter((item, index, array) => )
+}
