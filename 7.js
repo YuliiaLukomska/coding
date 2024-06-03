@@ -423,7 +423,75 @@ console.log(arrowFunc.prototype); // undefined (стрілочні функці�
 const arrayFirst = [1, 2, 3, 4, 5];
 const arraySecond = [2, 9, 4, 13, 8, 5];
 
-function crossedNumberChoose(array1, array2) {
-  const commonArray = array1.concat(array2);
-  const crossedNumber = commonArray.filter((item, index, array) => )
+// Замикання
+
+function outerFoo() {
+  const user = {
+    surname: 'Mango',
+    pet: 'hamster',
+  };
+  return function innerFoo() {
+    const pets = ['dog', 'cat', 'fish'];
+    pets.forEach(item => {
+      if (item.length > 3) {
+        user.pet = item;
+      }
+    });
+    return user;
+  };
+  innerFoo();
 }
+
+const closures = outerFoo();
+console.log(closures());
+
+function counts() {
+  let count = 0;
+  return function countIncreasing() {
+    count++;
+    return count;
+  };
+  countIncreasing();
+}
+
+const functclosure = counts();
+console.log(functclosure()); // 1
+console.log(functclosure()); // 2
+console.log(functclosure()); // 3
+
+const items = ['Apple', 'Banana', 'Orange', 'Mango'];
+const ul = document.querySelector('#list');
+items.forEach(item => {
+  const li = document.createElement('li');
+  li.textContent = item;
+  ul.appendChild(li);
+});
+
+// вищенаведене створення списку є нераціональним, оскільки ми постійно перебудовуємо ДОМ дерево, що вимагає великих затрат.
+// Ефективніше буде одразу створити всю розмітку і тільки тоді додати її в дом дерево одним махом. Див нижче.
+
+const vegetables = ['Cucumber', 'Tomato', 'Onion', 'Carrot'];
+const vegetableList = document.querySelector('#vegetable-list');
+const stringList = vegetables
+  .map(item => {
+    return `<li>${item}</li>`;
+  })
+  .join('');
+console.log(stringList);
+vegetableList.insertAdjacentHTML('afterbegin', stringList);
+
+// завдяки одній перебудові дом дерева такий підхід є більш ефективним та правильним.
+
+// Задача: В тебе є два масиви з числами. Тобі треба створити новий масив в якому будуть тільки ті числа, які є спільними в обох масивах.
+
+const amountOfSmth = [1, 6, 9, 10, 30, 71, 1, 6, 11, 11, 12];
+const amountOfSmth2 = [1, 67, 8, 10, 30, 2, 4, 7, 10, 1, 7, 8, 67];
+
+const uniqAmount1 = new Set(amountOfSmth); // тут набір унікальних значень першого масиву
+
+const uniqAmount2 = new Set(amountOfSmth2); // тут набір унікальних значень другого масиву
+
+const commonValues = Array.from(uniqAmount1).filter(item =>
+  uniqAmount2.has(item)
+); // has це метод сету (Set). Сет не є масивом,тому він не має методів масива, тому треба перетворити його на масив спочатку.
+console.log(commonValues); // [1, 10, 30]
