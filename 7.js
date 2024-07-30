@@ -495,3 +495,168 @@ const commonValues = Array.from(uniqAmount1).filter(item =>
   uniqAmount2.has(item)
 ); // has це метод сету (Set). Сет не є масивом,тому він не має методів масива, тому треба перетворити його на масив спочатку.
 console.log(commonValues); // [1, 10, 30]
+
+// Класи
+
+class User {
+  #email;
+  constructor({
+    firstName,
+    secondName,
+    age,
+    status,
+    location,
+    isMarried,
+    email,
+  }) {
+    this.firstName = firstName;
+    this.secondName = secondName;
+    this.age = age;
+    this.status = status;
+    this.location = location;
+    this.isMarried = isMarried;
+    this.#email = email;
+  }
+  // getlocation() {
+  //   return this.location;
+  // }
+  // setlocation(newLocation) {
+  //   this.location = newLocation;
+  // }
+  get email() {
+    return this.#email;
+  }
+
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+  // getAge() {
+  //   return this.age;
+  // }
+  // getEmail() {
+  //   return this.#email;
+  // }
+}
+
+// const petro = new User('Petro', 'Babich', 39, 'unemployed', 'Kyiv', true);
+
+// console.log(petro);
+// petro.setLocation('Madrid');
+// console.log(petro.getLocation()); // Madrid
+const yuliia = {
+  firstName: 'Yuliia',
+  secondName: 'Lukomska',
+  age: 27,
+  status: 'uneployed',
+  location: 'Kyiv',
+  isMarried: true,
+  email: 'lu@gmail.com',
+};
+
+const yuliiaEkzempliar = new User(yuliia);
+console.log(yuliiaEkzempliar);
+console.log(yuliiaEkzempliar.isMarried);
+console.log(yuliiaEkzempliar.email);
+yuliiaEkzempliar.email = 'al@gmail.com';
+console.log(yuliiaEkzempliar.email);
+// console.log(yuliiaEkzempliar.getEmail()); // lu@gmail.com
+yuliiaEkzempliar.location = 'Spain';
+console.log(yuliiaEkzempliar.location);
+
+class User2 {
+  #email;
+
+  constructor(params) {
+    this.name = params.name;
+    this.#email = params.email;
+  }
+
+  // Геттер email
+  get email() {
+    return this.#email;
+  }
+
+  // Сеттер email
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+const mango = new User2({
+  name: 'Mango',
+  email: 'mango@mail.com',
+});
+
+console.log(mango.email); // mango@mail.com
+
+mango.email = 'mango@supermail.com';
+
+console.log(mango.email); // mango@supermail.com
+
+// задавання екземпляру своїх методів. Напевно це недоречно, бо краще задати Класу методи, які стануть властивостями об'єкту prototype і
+// будуть доступні в [[Prototype]] для всіх майбутніх екземплярів класу.
+class Car {
+  constructor({ name, age }) {
+    this.name = name;
+    this.age = age;
+    this.changeName = function (newName) {
+      this.name = newName;
+    };
+    this.getName = function () {
+      return this.name;
+    };
+  }
+}
+
+const audi = new Car({ name: 'Audi', age: 2 });
+audi.changeName('toyota');
+console.log(audi.getName());
+console.log(audi);
+
+const greet = function () {
+  console.log('hello');
+};
+
+const setTmeoutId = setInterval(greet, 2000);
+
+clearInterval(setTmeoutId);
+
+const date = new Date();
+console.log(date);
+
+// Проміси
+
+const fetchUserData = username => {
+  const promise = new Promise((resolve, reject) => {
+    console.log(`hello ${username}`);
+    setTimeout(() => {
+      const isSuccess = true;
+      if (isSuccess) {
+        resolve('success value');
+      } else {
+        reject('error value');
+      }
+    }, 2000);
+  });
+  return promise;
+};
+
+fetchUserData('Mango')
+  .then(user => console.log(user))
+  .catch(error => console.log(error));
+
+const makePromise = ({ value, delay, shouldResolve = true }) => {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve(value);
+      } else {
+        reject(value);
+      }
+    }, delay);
+  });
+  return promise;
+};
+
+makePromise({ value: 'C', delay: 3000, shouldResolve: true })
+  .then(value => console.log(value))
+  .catch(error => alert(error));
