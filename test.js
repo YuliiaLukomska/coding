@@ -1,6 +1,16 @@
+// В тебе є речення "Катя любить жирафів", треба щоб в консоль вивело останній символ речення, для цього треба знайти значення
+// індексу останньої букви.
+const words = 'Kate loves giraffes';
+console.log(words[words.length - 1]); //s
+console.log(words.length);
+
 console.log(+'1' + '1' + '2'); // 112
 console.log('A' - 'B' + 2); // NaN
 console.log('A' - 'B' + 'A' + 3); // NaNA3
+
+const age = 24;
+const message = 'Poly is ' + age + ' years old!';
+console.log(message); // Poly is 24 years old!
 
 console.log(String); // function
 console.log(Number); //function
@@ -54,12 +64,14 @@ foo(); // 3; 0; unfefined; [] псевдомасив;
 foo(1, 2, 3); // 3; 3; 1; [1, 2, 3] псевдомасив;
 
 const resultAdd = '4' + '8' - '6';
-console.log(resultAdd); // спочатку буде конкатенація і '4' + '8' дасть -> 48. А далі 46 - 6 = 42.
+console.log(resultAdd); // спочатку буде конкатенація і '4' + '8' дасть -> 48. А далі 48 - 6 = 42.
 // в математичному виразі множення та ділення виконується спочатку, а далі додавання та віднімання (як і в математиці)
-console.log(4 + 10 - 'A' + 'B'); //NaNB
+console.log(4 + 10 - 'A' + 'B'); //NaNB. операції виконуємо послідовно -> 14 - 'A' це буде NaN. NaN + 'B' це буде конкатенація NaNB.
+// Якщо застосувати оператор + до рядка та будь-якого іншого типу даних, результатом буде новий рядок, що містить об'єднання вихідних значень.
 
 let amount = 2; // це глобальна область видимості. Всередині функції нам доступна змінна amount.
 
+// дуже цікава задачка, уважно і послідовно.
 function fook(amount) {
   amount = 5;
   return amount;
@@ -68,8 +80,8 @@ function fook(amount) {
 const a = fook(3);
 const b = fook(amount);
 
-console.log(a); // 3
-console.log(b); // 2
+console.log(a); // 3 зараз пише 5
+console.log(b); // 2 зараз пише 5
 
 // що означає 'присвоєння за значенням'? - в тебе є змінна string1,яка має значення `Bob`. Змінній string2 ми присвоюємо чисто
 // значення змінної string1, тобто просто копіюємо цей рядок і вставляємо як значення string2, але ці змінні є абсолютно НЕЗАЛЕЖНИМИ.
@@ -196,3 +208,8 @@ console.log(fooqResult); // error, q is not defined. error, w is not defined. er
 let hello;
 var qwery;
 const yes = 1;
+
+const af = {
+  apple: 2,
+  pineapple: 3,
+};

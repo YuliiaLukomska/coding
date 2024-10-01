@@ -1,6 +1,6 @@
-/* body {
-  color: orange;
-} */
+body {
+  color: black;
+}
 div ~ p {
   color: rgb(255, 106, 0);
 }
@@ -75,4 +75,67 @@ div ~ p {
 
   /* видаляє елемент із потоку сторінки,що дозволяє іншим елементам зайняти його місце */
   display: none;
+}
+
+table th,
+table td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+ul {
+  list-style: none;
+}
+
+.social-media-links .link {
+  color: green;
+  text-decoration: overline;
+}
+.social-media-links .link:hover,
+.social-media-links .link:focus {
+  color: red;
+}
+.social-media-links .link:active {
+  color: orange;
+}
+.social-media-links .link:visited {
+  color: rgb(128, 0, 102);
+}
+
+/* 
+.social-links .link {
+  color: rgb(128, 0, 128);
+}
+
+.social-links .link:hover,
+.social-links .link:focus {
+  color: orange;
+}
+
+.social-links .link:active {
+  color: red;
+}
+
+.social-links .link:visited {
+  color: green;
+} */
+.article_text {
+  text-indent: 100px;
+}
+.article_title {
+  color: black;
+  text-shadow: 6px 6px 4px violet;
+}
+pre::first-letter {
+  font-size: 24px;
+  color: red;
+  font-style: italic;
 }
