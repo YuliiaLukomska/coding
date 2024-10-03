@@ -112,17 +112,120 @@ toLowerCase() і trim() використовуємо щоб нормалізув
 
 // ти отримуєш хвилини, н-д 4500 хвилин. Тобі треба вивести дні, години, хвилини. Н-д: 3 068 хв = 2 дні 3 години 8 хвилин
 
-function timeCount(time) {
-  const days = Math.floor(time / 60 / 24);
-  console.log(days); // 2
+// function timeCount(time) {
+//   const days = Math.floor(time / 60 / 24);
+//   console.log(days); // 2
 
-  const restHours = Math.floor(time / 60 - days * 24);
+//   const restHours = Math.floor(time / 60 - days * 24);
 
-  const restMinutes = (((time / 60 - days * 24) * 60) % 60).toFixed(0);
+//   const restMinutes = (((time / 60 - days * 24) * 60) % 60).toFixed(0);
 
-  console.log(`${days} days ${restHours} hours ${restMinutes} minutes`);
-}
+//   console.log(`${days} days ${restHours} hours ${restMinutes} minutes`);
+// }
 
-console.log(timeCount(3068));
+// console.log(timeCount(3068));
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* При завантаженні сторінки користувачеві пропонується в prompt ввести число. Введення додається до значення змінної total.
+Операція введення числа триває до того часу, поки користувач не натисне кнопку Cancel у prompt.
+Після того як користувач припинив введення, натиснувши кнопку Cancel, показати alert з рядком "Загальна сума введених чисел дорівнює (сума)"
+Робити перевірку, що користувач ввів саме число, а не довільний набір символів не потрібно.
+*/
+
+// function sumCounting(number) {
+//   let total = 0;
+//   while (number !== null) {
+//     total += Number(number);
+//     number = prompt('Enter your number');
+//   }
+//   return alert(`Загальна сума введених чисел дорівнює ${total}`);
+// }
+
+// sumCounting(prompt('Enter a number here'));
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------
+
+// function sumCounting(number) {
+//   // у випадку циклу do while, коли ти одразу натискаєш cancel, то в параметр number записується null і далі виконується тіло інструкції do
+//   // тобто рахується total = 0 + Number(null) --> 0 + 0 = 0 тоді викликається prompt, ти знову клікаєш  cancel, number === null, умова не виконується і цикл зупиняється.
+//   // тому доречніше викор цикл while
+//   let total = 0;
+//   do {
+//     total += Number(number);
+//     number = prompt('Enter a number');
+//   } while (number !== null);
+
+//   return alert(`Sum equals ${total}`);
+// }
+
+// sumCounting(prompt('Enter a number'));
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Напишіть цикл, який пропонує ввести число більше за 100 через prompt.
+Якщо користувач ввів інше число, то попросити ввести число ще раз, і таке інше.
+Цикл повинен питати число, поки корист-ч не введе число більше за 100 або не натисне cancel. */
+
+// function checkNumber(number) {
+//   while (Number(number) <= 100 && number !== null) {
+//     number = prompt('Please, enter a number bigger than 100');
+//   }
+// }
+
+// checkNumber(prompt('Please, enter a number bigger than 100'));
+
+/* 
+За кожен місяць податкова нараховує на ЗП розробника 5% від суми.
+Напишіть консольну функцію, на яку користувач вводить суму зп і к-ть місяців 
+за доп prompt(), не забуваємо, що промпт повертає рядок.
+А податкова обчислює чистий дохід розробника за вказаний період.
+Для обчислення суми з урахуванням відсотків використовуйте цикл for.
+*/
+
+// function countNettoSalary() {
+//   const bruttoSalary = Number(prompt('Enter your brutto salary')); // 50000
+//   const monthsAmount = Number(prompt('Enter amount of months')); // 2
+//   const bruttoSalaryPerMonth = bruttoSalary / monthsAmount; // 25000
+
+//   let total = 0;
+
+//   for (let month = 1; month <= monthsAmount; month++) {
+//     total += bruttoSalaryPerMonth - bruttoSalaryPerMonth * 0.05;
+//   }
+
+//   return total; // 47500
+// }
+
+// const resultNettoSalary = countNettoSalary();
+// console.log(resultNettoSalary);
+
+// верхню задачку трохи виправити, бо в промпт ми будемо вводити одразу брутто зп за місяць
+
+/*
+Напишіть код, який запитуватиме логін за доп промпт та логувати результат у консоль браузера.
+Якщо користувач вводить "Адмін", то промпт запитує пароль. Якщо нічого не ввели або натиснуто клавішу Esc - вивести рядок "Скасовано".
+В іншому випадку вивести рядок "Я вас не знаю".
+Пароль перевіряти так: Якщо введено пароль "Я головний", то вивести рядок "Привіт", інакше виводити рядк "Невірний пароль!"
+*/
+
+// function checkLogin() {
+//   const login = prompt('Enter your login here');
+//   console.log(login);
+//   if (login === 'Адмін') {
+//     const password = prompt('Enter your password');
+//     if (password === 'Я головний') {
+//       alert('Привіт');
+//     } else {
+//       console.log('Невірний пароль');
+//     }
+//   } else if (login === null || login.trim() === '') {
+//     console.log('Скасовано');
+//   } else {
+//     console.log('Я вас не знаю');
+//   }
+// }
+
+// checkLogin();
+
+// if (login === null || login.trim() === '') - цей рядок варто скоротити до if(!login)
