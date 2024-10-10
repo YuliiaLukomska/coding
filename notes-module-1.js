@@ -16,6 +16,30 @@ let a = 2;
 a = 'hello'. 
 
 -однопотокова: за одиницю часу виконується одна функція.
+JavaScript — однопотокова мова, тобто в одну одиницю часу може виконуватися тільки одна інструкція. 
+Це означає, що вже викликані функції, які не закінчили своє виконання, повинні чекати виконання функцій, 
+викликаних усередині себе, для того щоб продовжити свою роботу.
+
+function fnA() {
+  console.log("Log inside fnA function before calling fnB");
+  fnB();
+  console.log("Log inside fnA function after fnB call");
+}
+
+function fnB() {
+  console.log("Log inside fnB function");
+}
+
+console.log("Log before calling fnA");
+fnA();
+console.log("Log after calling fnA");
+
+// "Log before calling fnA"
+// "Log inside fnA function before calling fnB"
+// "Log inside fnB function"
+// "Log inside fnA function after fnB call"
+// "Log after calling fnA"
+
 -багатопарадигименна: є різні стилі написання коду (ООП, функціональне програмування);
 -клієнт-серверна;
 
