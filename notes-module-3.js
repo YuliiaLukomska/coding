@@ -278,6 +278,47 @@ console.log(guestsNumbers.includes(8)); // true
 console.log(guestsNumbers.includes(2)); // false
 
 Для того щоб зробити копію масиву найчастіше викор оператор spread(), або Array.from().
+
+The shift() method of Array instances removes the first element from an array and returns that removed element. 
+This method changes the length of the array.
+
+const array1 = [1, 2, 3];
+
+const firstElement = array1.shift();
+
+console.log(array1);
+// Expected output: Array [2, 3]
+
+console.log(firstElement);
+// Expected output: 1
+
+
+The unshift() method of Array instances adds the specified elements to the beginning of an array and returns the new length of the array.
+const array1 = [1, 2, 3];
+
+console.log(array1.unshift(4, 5));
+// Expected output: 5
+
+console.log(array1);
+// Expected output: Array [4, 5, 1, 2, 3]
+
+Метод pop() використовують для видалення останнього елемента масиву.
+
+const cities = ['Odessa', 'Kyiv', 'Lviv'];
+console.log(cities.pop()); // повернув елемент, який видалив з масиву (останній елемент масиву) -> 'Lviv'
+console.log(cities); // ['Odessa', 'Kyiv']
+
+Метод splice() мутує масив? Так. За доп цього методи ми можемо видаляти або додавати елементи до масиву мутуючи його.
+
+const colors = ['grey', 'yellow', 'black'];
+console.log(colors.splice(1, 0, 'red')); // додаємо колір ред другий елементом масиву. В цьому випадку метод splice() повертає []
+console.log(colors); // ['grey', 'red', 'yellow', 'black'];
+console.log(colors.splice(0, 1)); // видаляємо 1 елемент з індексом 0. Метод повертає масив з видаленими елементами -> ['grey']
+console.log(colors); // ['red', 'yellow', 'black']
+
+// Питання: якщо метод splice() не видаляє якісь елементи масиву, що він повертає. Н-д, якщо ви вказали не існуючий індекс, або не видаляєте,
+// а додаєте новий елемент до масиву.
+console.log(colors.splice(10, 0)); // повертає []
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 */

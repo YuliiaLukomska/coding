@@ -251,7 +251,93 @@ console.log(getAllPropValues('name'));
 console.log(getAllPropValues('category'));
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
-Методи об'єкта
+Методи об'єкта 
+Функції, які виступають властивостями об'єкта називають методами об'єкта.
+
+
+const library = {
+  books: ['Hercule Poirot', 'Hamlet', 'Eneida', 'Tygrolovy'],
+  addBook(newBook) {
+    this.books.push(newBook);
+  },
+  deleteBook(unnecessaryBook) {
+    const index = this.books.indexOf(unnecessaryBook);
+    console.log(index);
+    if (index > -1) {
+      this.books.splice(index, 1);
+      console.log(this.books);
+    }
+  },
+  showUpdatedBooks() {
+    return this.books;
+  },
+};
+
+library.deleteBook('Eneida');
+console.log(library.showUpdatedBooks());
+library.deleteBook('Dogs');
+console.log(library.showUpdatedBooks());
+
+Синтаксис spread і rest
+
+Залишкові параметри - ...args. Коли кількість аргументів при виклику функції перевищує к-ть заданих параметрів, то залишкові аргументи
+ми можемо зібрати в ...args. Це буде масив з залишковими аргументами. Тобто синтаксис ...args або ...rest дозволяє зібрати групу незалежних 
+елементів у масив.
+
+function sum(x, y, ...args) {
+  console.log(x + y);
+  console.log(args);
+}
+
+sum(2, 6, 10, 4); // 8 [10, 4]
+sum(3, 9); // 12  []
+
+
+
+function foo(...args) {
+	console.log(args);
+}
+foo("a", "b"); // ['a', 'b']
+
+Наприклад в тебе завдання: напиши ф-ю,яка приймає довільну к-ть аргументів і повертає їх суму.
+
+const sum = function (...rest) {
+  let total = 0;
+  for (const item of rest) {
+    total += item;
+  }
+  return total;
+};
+
+console.log(sum(1, 2, 3, 4, 5, 6, 6, 7, 8, 9));  // 51
+
+Склеювання та копіювання масивів за доп оператора ...spread (див hints)
+
+Створення об'єкта
+
+Операція spread дозволяє розпилити властивості довільної кількості об'єктів в один новий.
+Порядок має значення, оскільки в об'єкті не може бути два однакових ключа, тому вони просто перезапишуться. 
+
+
+const first = { propA: 5, propB: 10 };
+const second = { propC: 15, propB: 3 };
+const third = { ...first, ...second };
+console.log(third); // { propA: 5, propB: 3, propC: 15 }
+
 
 
 */
+
+const students = {
+  firstStudent: 'Olya',
+  secondStudent: 'Katia',
+};
+
+const students2 = {
+  thirdStudent: 'Max',
+  firstStudent: 'Yuliia',
+};
+
+const mix = { ...students, ...students2 };
+
+console.log(mix);

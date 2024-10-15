@@ -54,4 +54,56 @@ array[index] = 'newValue';
 То ти мутуєш початковий масив.
 Найкращий варіант - створення копії масиву і робота з копією масиву.
 
+
+
+Для того щоб видалити елемент з масиву, можна використати метод splice(index, the number of items to delete). Але цей метод мутує масив, він може
+як видаляти так і додавати нові елементи до масиву. 
+
+Н-д, в тебе є масив з книгами і тобі треба видалити книгу по назві. 
+
+const library = {
+  books: ['Hercule Poirot', 'Hamlet', 'Eneida', 'Tygrolovy'],
+  addBook(newBook) {
+    this.books.push(newBook);
+  },
+  deleteBook(unnecessaryBook) {
+    const index = this.books.indexOf(unnecessaryBook);
+    
+    if (index > -1) {
+      this.books.splice(index, 1);
+    }
+  },
+  showUpdatedBooks() {
+    return this.books;
+  },
+};
+
+library.deleteBook('Eneida');
+console.log(library.showUpdatedBooks()); // ['Hercule Poirot', 'Hamlet', 'Tygrolovy']
+library.deleteBook('Dogs');
+console.log(library.showUpdatedBooks());  // ['Hercule Poirot', 'Hamlet', 'Tygrolovy']
+
+
+Синтаксис ...rest (або ...args) дозволяє отримати масив з переданих функції аргументів. Також можна викор arguments - він дає псевдомасив - рідко
+використовують.
+
+Інколи нам навпаки треба з масиву зробити список елементів, тоді викор синтаксис оператору розпилення ...spread.
+Коли функціонал ...spread використовується при виклику функції, він перетворює масив на список аргументів.
+
+console.log(...[1, 2, 3]); // 1, 2, 3
+
+Раніше, щоб скопіювати масив, ми викор метод slice(), а щоб склеяти два і більше масивів - concat().
+В сучасній розробці для цього викор оператор ...spread. array1 та array2 не змінюються.
+
+const array1 = [1, 3, 5];
+const array2 = [2, 4, 8];
+const copyOfArray1 = [...array1];
+const combo = [...array1, ...array2];
+
+
+Для видалення елементу з масиву зазвичай викор. метод pop() - якщо треба видалити елемент в кінці або splice() - якщо треба конкретний елемент видалити; 
+Обидва методи мутують вихідний масив. 
+
 */
+
+// Деструктуризація - див ще раз пояснення на уроці 4 модуль, 2-й урок, 32:00
