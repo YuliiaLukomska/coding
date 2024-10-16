@@ -240,3 +240,76 @@ console.log(arr);
 // джуе важливо розуміти, що робить кожен метод. Якийсь одразу мутує масив, якийсь створює копію.
 // наприклад, якщо ти зробиш копію масиву і до копії почнеш застос метод splice() і далі реверс і джоін, то вже сам splice() поверне тобі
 // видалений елемент і далі все буде застосовуватись до цього елементу, а не масиву і все піде нетак.
+
+/*
+
+*/
+
+function isCapasityEnough(product, containerSize) {
+  const amountsArray = Object.values(product);
+  let total = 0;
+  for (const number of amountsArray) {
+    total += number;
+  }
+
+  return containerSize >= total;
+}
+
+console.log(isCapasityEnough({ apples: 10, peaches: 5 }, 20));
+console.log(isCapasityEnough({ apples: 30, peaches: 5 }, 20));
+console.log(isCapasityEnough({ apples: 10, peaches: 10 }, 20));
+
+console.log(isCapasityEnough({ apples: 18, potatoes: 5, oranges: 2 }, 7)); // false
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
+
+// Порахувати середню к-ть калорій
+
+function calcAverageCalories(days) {
+  let total = 0;
+  for (const obj of days) {
+    if (obj.hasOwnProperty('calories')) {
+      total += obj.calories;
+    }
+  }
+
+  return total ? total / days.length : 0;
+}
+
+console.log(
+  calcAverageCalories([
+    { day: 'monday', calories: 3010 },
+    { day: 'tuesday', calories: 3200 },
+    { day: 'wednesday', calories: 3120 },
+    { day: 'thursday', calories: 2900 },
+    { day: 'friday', calories: 3450 },
+    { day: 'saturday', calories: 3280 },
+    { day: 'sunday', calories: 3300 },
+  ])
+); // 3180
+
+console.log(calcAverageCalories([])); // 0
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------
+
+const profile = {
+  username: 'Jacob',
+  playTime: 300,
+  changeUsername(newName) {
+    this.username = newName;
+  },
+  updatePlayTime(hours) {
+    this.playTime = this.playTime + hours;
+  },
+  getInfo() {
+    return `${this.username} has ${this.playTime} active hours!`;
+  },
+};
+
+console.log(profile.getInfo()); // "Jacob has 300 active hours!"
+
+profile.changeUsername('Marco');
+console.log(profile.getInfo()); // "Marco has 300 active hours!"
+
+profile.updatePlayTime(20);
+console.log(profile.getInfo()); // "Marco has 320 active hours!"

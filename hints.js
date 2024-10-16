@@ -123,6 +123,7 @@ const copyOfObject = {
 };
 
 
+Нуль поділити на 0 буде NaN
 
 
 */
