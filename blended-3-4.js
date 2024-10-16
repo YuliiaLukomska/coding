@@ -72,3 +72,171 @@ e[w] = 40; // тут знову ключем об'єкту стає пустий
 //  і отримує значення 40.
 
 console.log(e); //  {a: 10, b: 20, [object Object]: 40}
+
+// -------------------------------------------------------------ЗАДАЧІ-----------------------------------------------------------------------
+
+/* 
+Напиши скрипт для об'єкта user послідовно:
+1 додати поле mood зі значенням 'happy'
+2 замінити hobby на 'skydiving'
+3 замінити значення premium на false
+4 виводить вміст об'єкта users у форматі ключ: значення використовуючи Object.keys() і for...of
+
+*/
+
+const user = {
+  name: 'John',
+  age: 20,
+  hobby: 'tennis',
+  premium: true,
+};
+
+// user.mood = 'happy';
+user['mood'] = 'happy';
+user.hobby = 'skydiving';
+user.premium = false;
+
+const userKeys = Object.keys(user);
+
+for (const key of userKeys) {
+  console.log(`${key}: ${user[key]}`);
+}
+
+for (const item in user) {
+  console.log(item);
+} // цикл for..in перебирає лише ключі об'єкту
+
+// --------------------------------------------------------------------------------------------------------------------------------------------
+
+/* 
+Напиши функцію, яка приймає об'єкт і рахує загальну суму зарплат працівників
+*/
+const someObj = {
+  worker1: 360,
+  worker2: 750,
+  worker3: 240,
+};
+
+function countSum(obj) {
+  const values = Object.values(someObj);
+  let total = 0;
+  for (const item of values) {
+    total += item;
+  }
+  return total;
+}
+
+console.log(countSum(someObj)); // 1350
+
+// -----------------------------------------------------------------------------------------------------------------------------------------
+/*
+Напишіть ф-ію calcTotalPrice(someStones, stonesName), 
+яка приймає масив об'єктів та рядок під назвою каменю.
+Функція рахує та повертає загальну вартість каменів з таким ім'ям, ціною та кількістю з об'єкта.
+*/
+
+const stones = [
+  { name: 'Ізумруд', price: 1300, quantity: 4 },
+  { name: 'Діамант', price: 2700, quantity: 6 },
+  { name: 'Сапфір', price: 400, quantity: 7 },
+  { name: 'Щебень', price: 150, quantity: 100 },
+];
+
+function calcTotalPrice(someStones, stonesName) {
+  for (const obj of someStones) {
+    if (obj.name === stonesName) {
+      return obj.price * obj.quantity;
+    }
+  }
+  return 'There is no stone with such name';
+}
+
+console.log(calcTotalPrice(stones, 'Щебень'));
+console.log(calcTotalPrice(stones, 'hjhjh'));
+console.log(calcTotalPrice(stones, 'Діамант'));
+
+//------------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Напишіть функцію, яка приймає масив об'єктів і повертає новий масив. 
+Зробіть знижку 20% на всі фрукти у масив. 
+Надайте id для кожного продукту.
+*/
+
+const fruits = [
+  { name: 'apple', price: 200 },
+  { name: 'orange', price: 300 },
+  { name: 'grapes', price: 750 },
+];
+
+// function createNewObj(obj) {
+//   const copyOfFruits = [...obj];
+
+//   for (const item of copyOfFruits) {
+//     item.price = item.price - item.price * 0.2;
+//     item.id = copyOfFruits.indexOf(item);
+//   }
+//   return copyOfFruits;
+// }
+
+// console.log(createNewObj(fruits));
+
+// або інший метод
+
+function createNewObj(obj) {
+  const newArray = [];
+  let id = 1;
+  for (const item of obj) {
+    const newItem = { ...item, price: item.price * 0.8, id };
+    newArray.push(newItem);
+    id += 1;
+  }
+  return newArray;
+}
+
+console.log(createNewObj(fruits));
+console.log(fruits);
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
+/* 
+Є масив arr. Написати функцію, яка поверне рядок "JS is the BEST".
+Для цього: 
+ розвернути масив,
+ вирізати foo,
+ перевести його в рядок розділений пробілами,
+  Масив arr не має мутуватись
+
+
+*/
+
+const arr = ['BEST', 'the', 'foo', 'is', 'JS'];
+
+// function createString(arr) {
+//   const reversedArr = [...arr].reverse();
+//   const indexOfFoo = reversedArr.indexOf('foo');
+//   reversedArr.splice(indexOfFoo, 1);
+
+//   return reversedArr.join(' ');
+// }
+
+// console.log(createString(arr));
+// console.log(arr);
+
+// Запис в один рядок від ментора Зозулі
+
+function createString(arr) {
+  // const copyArr = [...arr]; XXXXXXXX окрему копію створювати нетреба, бо метод slice() сам створює копію, він повертає новий масив з необх значеннями
+
+  return arr
+    .slice(0, arr.indexOf('foo'))
+    .concat(arr.slice(arr.indexOf('foo') + 1))
+    .reverse()
+    .join(' ');
+}
+
+console.log(createString(arr));
+console.log(arr);
+
+// джуе важливо розуміти, що робить кожен метод. Якийсь одразу мутує масив, якийсь створює копію.
+// наприклад, якщо ти зробиш копію масиву і до копії почнеш застос метод splice() і далі реверс і джоін, то вже сам splice() поверне тобі
+// видалений елемент і далі все буде застосовуватись до цього елементу, а не масиву і все піде нетак.
