@@ -125,7 +125,7 @@ const copyOfObject = {
 
 Нуль поділити на 0 буде NaN
 
-Найпростіший метод для розрахунку суми елементів масиву:
+Простий метод для розрахунку суми елементів масиву forEach():
 const numb = [1, 2, 3, 4, 5];
 
 let total = 0;
@@ -134,6 +134,12 @@ numb.forEach(function(item){
 total += item; });
 
 console.log(total); // 15
+
+Ще простіший метод reduce(): 
+const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((accum, item) => accum + item, 0);
+console.log(sum); // 15
 
 Функції ми можемо створювати як оголошення функції(function declaration) та як функціональний вираз (function expression).
 

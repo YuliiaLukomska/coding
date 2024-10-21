@@ -243,4 +243,71 @@ console.log(flattenedCourses) // ["mathematics", "physics", "science", "mathemat
 Відмінність від map() полягає в тому, що новий масив «розгладжується» на глибину, що дорівнює одиниці (одна вкладеність). 
 Цей розгладжений (плоский) масив і є результатом роботи flatMap().
 
+--Методи filter і find ---
+
+Метод filter(callback) використовується для єдиної операції - фільтрації масиву. Тобто відбору усіх елементів з колекції за певним критерієм.
+
+array.filter((element, index, array) => {
+  // Тіло колбек-функції
+});
+
+const values = [51, -3, 27, 21, -68, 42, -37];
+
+const positiveValues = values.filter(value => value >= 0);
+console.log(positiveValues); // [51, 27, 21, 42]
+// до positiveValues потрапили всі елементи масиву values, які задовольнили умову колбека, тобто були >= 0  
+
+const negativeValues = values.filter(value => value < 0);
+console.log(negativeValues); // [-3, -68, -37]
+// до negativeValues потрапили всі елементи масиву values, які задовольнили умову колбека, тобто були < 0  
+
+const bigValues = values.filter(value => value > 1000);
+console.log(bigValues); // []
+// до negatibigValues eValues потрапили всі елементи масиву values, які задовольнили умову колбека, тобто були > 1000
+
+console.log(values); // [51, -3, 27, 21, -68, 42, -37]
+// Оригінальний масив values не змінився
+
+
+--Метод find()--
+
+Метод find(callback) дозволяє знайти і повернути перший відповідний елемент, що задовольняє умову, після чого перебирання масиву припиняється. 
+Тобто він, на відміну від методу filter(callback), шукає до першого збігу.
+
+array.find((element, index, array) => {
+  // Тіло колбек-функції
+});
+
+Якщо жоден елемент не задовольнив умову, тобто для всіх елементів колбек повернув false, метод повертає undefined
+
+Метод find() використовується для одного завдання — пошуку першого елемента, який задовольняє умову. Наприклад, пошук користувача за поштою, 
+автомобіля — за серійним номером, книги — за назвою тощо.
+
+
+
 */
+
+// accum - значення, яке розраховується
+// accum = numb[0], якщо явно не задаємо початкове значення аккумулятора
+
+const numb = [1, 2, 5, 10];
+
+const sum = numb.reduce((accum, item, index, array) => accum + item, 0);
+console.log(sum);
+
+const names = ['Olena', 'Sasha', 'Yana'];
+
+const object = names.reduce((accum, item, index) => {
+  return {
+    ...accum,
+    [index]: item,
+  };
+}, {});
+
+console.log(object); // {0: 'Olena', 1: 'Sasha', 2: 'Yana'}
+
+const words = ['I', 'like', 'learning', 'English'];
+
+const sentence = words.reduce((accum, item) => accum + ' ' + item);
+
+console.log(sentence); // 'I like learning English'
