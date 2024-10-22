@@ -311,3 +311,245 @@ const words = ['I', 'like', 'learning', 'English'];
 const sentence = words.reduce((accum, item) => accum + ' ' + item);
 
 console.log(sentence); // 'I like learning English'
+
+// --Метод toSorted()--
+
+/*
+Оскільки за замовчуванням перед сортуванням метод toSorted() приводить усі елементи масиву до рядків, то фактично елементи сортуються як рядки,
+ тобто на основі їхніх значень у таблиці Unicode. Стандартне сортування чисел виглядає незвично, коли ми думаємо про числа, але зрозуміло,
+  якщо знати, що числа були перетворені на рядки.
+
+const scores = [27, 2, 41, 4, 7, 3, 75];
+
+console.log(scores.toSorted()); // [2, 27, 3, 4, 41, 7, 75]
+
+Масив рядків
+Масив рядків сортується за алфавітом.
+Водночас порядковий номер великих літер менший, ніж у малих.
+
+
+
+
+Необхідно отримати масив їхніх імен, відсортованих за зростанням балів за тест.
+
+*/
+
+const students = [
+  { name: 'Mango', score: 83, courses: ['mathematics', 'physics'] },
+  { name: 'Poly', score: 59, courses: ['science', 'mathematics'] },
+  { name: 'Ajax', score: 37, courses: ['physics', 'biology'] },
+  { name: 'Kiwi', score: 94, courses: ['literature', 'science'] },
+];
+
+const namesArray = students
+  .toSorted((a, b) => a.score - b.score)
+  .map(item => item.name);
+console.log(namesArray);
+
+// Отримаємо масив унікальних відвідуваних предметів, відсортований за алфавітом.
+
+const unicCourses = students
+  .flatMap(item => item.courses)
+  .filter((item, index, array) => array.indexOf(item) === index)
+  .toSorted((a, b) => a.localeCompare(b));
+
+console.log(unicCourses);
+
+// Напиши стрілочну функцію getUserNames(users), яка прийматиме один параметр users — масив об’єктів користувачів.
+// Функція має повертати масив імен усіх користувачів(властивість name) із масиву users.
+
+// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її викликів.
+
+const getUserNames = users => {
+  return users.map(item => item.name);
+};
+
+console.log(
+  getUserNames([
+    {
+      name: 'Moore Hensley',
+      email: 'moorehensley@indexia.com',
+      balance: 2811,
+    },
+    {
+      name: 'Sharlene Bush',
+      email: 'sharlenebush@tubesys.com',
+      balance: 3821,
+    },
+    {
+      name: 'Ross Vazquez',
+      email: 'rossvazquez@xinware.com',
+      balance: 3793,
+    },
+    {
+      name: 'Elma Head',
+      email: 'elmahead@omatom.com',
+      balance: 2278,
+    },
+    {
+      name: 'Carey Barr',
+      email: 'careybarr@nurali.com',
+      balance: 3951,
+    },
+    {
+      name: 'Blackburn Dotson',
+      email: 'blackburndotson@furnigeer.com',
+      balance: 1498,
+    },
+    {
+      name: 'Sheree Anthony',
+      email: 'shereeanthony@kog.com',
+      balance: 2764,
+    },
+  ])
+);
+
+const getUsersWithFriend = (users, friendName) => {
+  return users.filter(item => item.friends.includes(friendName));
+};
+
+const allUsers = [
+  {
+    name: 'Moore Hensley',
+    friends: ['Sharron Pace'],
+  },
+  {
+    name: 'Sharlene Bush',
+    friends: ['Briana Decker', 'Sharron Pace'],
+  },
+  {
+    name: 'Ross Vazquez',
+    friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
+  },
+  {
+    name: 'Elma Head',
+    friends: ['Goldie Gentry', 'Aisha Tran'],
+  },
+  {
+    name: 'Carey Barr',
+    friends: ['Jordan Sampson', 'Eddie Strong'],
+  },
+  {
+    name: 'Blackburn Dotson',
+    friends: ['Jacklyn Lucas', 'Linda Chapman'],
+  },
+  {
+    name: 'Sheree Anthony',
+    friends: ['Goldie Gentry', 'Briana Decker'],
+  },
+];
+
+console.log(getUsersWithFriend(allUsers, 'Briana Decker'));
+
+console.log(getUsersWithFriend(allUsers, 'Adrian Cross')); // []
+
+const sortByDescendingFriendCount = users => {
+  return users.toSorted((a, b) => b.friends.length - a.friends.length);
+};
+
+console.log(
+  sortByDescendingFriendCount([
+    {
+      name: 'Moore Hensley',
+      friends: ['Sharron Pace'],
+      gender: 'male',
+    },
+    {
+      name: 'Sharlene Bush',
+      friends: ['Briana Decker', 'Sharron Pace'],
+      gender: 'female',
+    },
+    {
+      name: 'Ross Vazquez',
+      friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
+      gender: 'male',
+    },
+    {
+      name: 'Elma Head',
+      friends: ['Goldie Gentry', 'Aisha Tran'],
+      gender: 'female',
+    },
+    {
+      name: 'Carey Barr',
+      friends: ['Jordan Sampson', 'Eddie Strong'],
+      gender: 'male',
+    },
+    {
+      name: 'Blackburn Dotson',
+      friends: ['Jacklyn Lucas', 'Linda Chapman'],
+      gender: 'male',
+    },
+    {
+      name: 'Sheree Anthony',
+      friends: ['Goldie Gentry', 'Briana Decker'],
+      gender: 'female',
+    },
+  ])
+);
+
+const getTotalBalanceByGender = (users, gender) => {
+  return users
+    .filter(item => item.gender === gender)
+    .reduce((accum, item) => accum + item.balance, 0);
+};
+
+const clients = [
+  {
+    name: 'Moore Hensley',
+    gender: 'male',
+    balance: 2811,
+  },
+  {
+    name: 'Sharlene Bush',
+    gender: 'female',
+    balance: 3821,
+  },
+  {
+    name: 'Ross Vazquez',
+    gender: 'male',
+    balance: 3793,
+  },
+  {
+    name: 'Elma Head',
+    gender: 'female',
+    balance: 2278,
+  },
+  {
+    name: 'Carey Barr',
+    gender: 'male',
+    balance: 3951,
+  },
+  {
+    name: 'Blackburn Dotson',
+    gender: 'male',
+    balance: 1498,
+  },
+  {
+    name: 'Sheree Anthony',
+    gender: 'female',
+    balance: 2764,
+  },
+];
+
+console.log(getTotalBalanceByGender(clients, 'male')); // 12053
+
+console.log(getTotalBalanceByGender(clients, 'female')); // 8863
+
+let total = 0;
+
+[1, 2, 3, 4].forEach(item => (total += item));
+
+console.log(total);
+
+// const book = {
+//   title: 'Hello',
+//   updateTitle(newTitle) {
+//     console.log(this);
+
+//     this.title = newTitle;
+//   },
+// };
+
+// const update = book.updateTitle;
+
+// console.log(update('Lord Of The Rings'));
