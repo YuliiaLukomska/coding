@@ -70,7 +70,7 @@ const user = {
 };
 
 const otherShowTag = user.showTag; // тут просто посилання на функцію. Контекст втрачено.
-otherShowTag(); // Uncaught TypeError: Cannot read properties of undefined (reading 'tag')
+// otherShowTag(); // Uncaught TypeError: Cannot read properties of undefined (reading 'tag')
 // Можна використати метод bind, щоб прив'язати контекст об'єкту до функції і тоді в otherShowTag  буде записана нова функція з контекстом.
 
 // Що буде виведено в консоль?
@@ -85,3 +85,88 @@ let user3 = {
 console.log(user3.sayHi()); // 'Poly'. this в стрілкових функціях визначається місцем оголошення стрілкової функції і посилається на
 // батьківську область видимості місця, де було оголошено стрілкову функцію - в прикладі виходимо на одні фігурні дужки назад  і
 // це буде об'єкт user3.
+
+// --Задача--
+// Напишіть ф-ю, яка приймає масив об'єктів і повертає новий масив. Зробіть знижку 20% на всі фрукти у масиві. Надайте id для кожного продукту.
+
+const fruits = [
+  { name: 'apple', price: 200 },
+  { name: 'orange', price: 300 },
+  { name: 'grapes', price: 750 },
+];
+
+// const updateFruits = fruitsArray => {
+//   return fruitsArray.map((item, index) => {
+//     return { ...item, price: item.price * 0.8, id: index + 1 };
+//   });
+// };
+
+// console.log(updateFruits(fruits));
+
+// Щоб скоротити запис рішення можна зробити неявне повернення стрілочної функції.
+// В методі map треба додати круглі дужки, щоб фігурні дужки об'єкта? який повертається, не сприймались як дужки для return.
+
+const updateFruits = fruitsArray =>
+  fruitsArray.map((item, index) => ({
+    ...item,
+    price: item.price * 0.8,
+    id: index + 1,
+  }));
+
+console.log(updateFruits(fruits));
+
+// Поверніть об'єкт в якому вказано кількість тегів.
+// Очікуваний результат {js: 3, nodejs: 3, css: 2, react: 2}
+
+const tweets = [
+  { id: '000', likes: 5, tags: ['js', 'nodejs'] },
+  { id: '001', likes: 2, tags: ['html', 'css'] },
+  { id: '002', likes: 17, tags: ['html', 'js', 'nodejs'] },
+  { id: '003', likes: 8, tags: ['css', 'react'] },
+  { id: '004', likes: 0, tags: ['js', 'nodejs', 'react'] },
+];
+
+const createObj = array => {
+  const arrayOfTags = array.flatMap(item => item.tags);
+
+  const obj = arrayOfTags.reduce((accum, item, index) => {
+    return { ...accum, [item]: accum[item] ? accum[item] + 1 : 1 };
+  }, {});
+  // якщо в акумуляторі є вже такий тег, то збільш його на 1, якщо нема, то його значенням буде 1.
+  return obj;
+};
+
+console.log(createObj(tweets));
+
+// ['js', 'nodejs', 'html', 'css', 'html', 'js', 'nodejs', 'css', 'react', 'js', 'nodejs', 'react']
+// Очікуваний результат {js: 3, nodejs: 3, css: 2, react: 2}
+
+const dates = {
+  Monday: new Date('2023-05-12'),
+  Tuesday: new Date('2020-02-22'),
+  Wednesday: new Date('2025-05-05'),
+  Thursday: new Date('2024-12-12'),
+  Friday: new Date('2022-02-02'),
+  Saturday: new Date('2026-11-11'),
+};
+
+// function updateDates(obj) {
+//   const array = [];
+//   for (const day in obj) {
+//     console.log(obj[day]);
+//     if (obj[day] > new Date()) {
+//       array.push(day);
+//     }
+//   }
+//   return array;
+// }
+
+// console.log(updateDates(dates));
+
+function updateDates(obj) {
+  const objKeys = Object.keys(obj);
+  const actualDates = objKeys.filter(item => obj[item] > new Date());
+  return actualDates.toSorted((a, b) => obj[a] - obj[b]);
+}
+
+console.log(updateDates(dates));
