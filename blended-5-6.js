@@ -170,3 +170,143 @@ function updateDates(obj) {
 }
 
 console.log(updateDates(dates));
+
+// task-1 hw module 6
+
+const customer = {
+  username: 'Mango',
+  balance: 24000,
+  discount: 0.1,
+  orders: ['Burger', 'Pizza', 'Salad'],
+  // Change code below this line
+  getBalance() {
+    return this.balance;
+  },
+  getDiscount() {
+    return this.discount;
+  },
+  setDiscount(value) {
+    this.discount = value;
+  },
+  getOrders() {
+    return this.orders;
+  },
+  addOrder(cost, order) {
+    this.balance -= cost - cost * this.discount;
+    this.orders.push(order);
+  },
+  // Change code above this line
+};
+
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, 'Steak');
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
+
+// task-2
+
+class Storage {
+  #items;
+  constructor(items) {
+    this.#items = items;
+  }
+  getItems() {
+    return this.#items;
+  }
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+  removeItem(itemToRemove) {
+    if (this.#items.indexOf(itemToRemove) > 0) {
+      this.#items.splice(this.#items.indexOf(itemToRemove), 1);
+    }
+  }
+}
+
+const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem('Droid');
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem('Prolonger');
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem('Scaner');
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+// task-3
+class StringBuilder {
+  #value;
+  constructor(initialValue) {
+    this.#value = initialValue;
+  }
+  getValue() {
+    return this.#value;
+  }
+  padEnd(str) {
+    this.#value = this.#value + str;
+  }
+  padStart(str) {
+    this.#value = str + this.#value;
+  }
+  padBoth(str) {
+    this.#value = str + this.#value + str;
+  }
+}
+
+const builder = new StringBuilder('.');
+console.log(builder.getValue()); // "."
+builder.padStart('^');
+console.log(builder.getValue()); // "^."
+builder.padEnd('^');
+console.log(builder.getValue()); // "^.^"
+builder.padBoth('=');
+console.log(builder.getValue()); // "=^.^="
+
+// ['js', 'nodejs', 'html', 'css', 'html', 'js', 'nodejs', 'css', 'react', 'js', 'nodejs', 'react']
+// Очікуваний результат {js: 3, nodejs: 3, css: 2, react: 2}
+
+const tags = [
+  'js',
+  'nodejs',
+  'html',
+  'css',
+  'html',
+  'js',
+  'nodejs',
+  'css',
+  'react',
+  'js',
+  'nodejs',
+  'react',
+];
+
+const object = tags.reduce((accum, item, index, array) => {
+  return { ...accum, [item]: accum[item] ? accum[item] + 1 : 1 };
+}, {});
+console.log(object);
+
+const tweets2 = [
+  { id: '000', likes: 5, tags: ['js', 'nodejs'] },
+  { id: '001', likes: 2, tags: ['html', 'css'] },
+  { id: '002', likes: 17, tags: ['html', 'js', 'nodejs'] },
+  { id: '003', likes: 8, tags: ['css', 'react'] },
+  { id: '004', likes: 0, tags: ['js', 'nodejs', 'react'] },
+];
+
+// Очікуваний результат {js: 3, nodejs: 3, css: 2, react: 2}
+
+function createObj2(array) {
+  return array.reduce((accum, item) => {
+    item.tags.forEach(tag => {
+      accum[tag] = accum[tag] + 1 || 1;
+      console.log(accum);
+    });
+
+    return accum;
+  }, {});
+}
+
+console.log(createObj2(tweets2));
